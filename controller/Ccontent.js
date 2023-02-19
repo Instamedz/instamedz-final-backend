@@ -53,7 +53,6 @@ const model=modelfind(care)
     }
 }
 
-
 export const deletecontent=async(req,res)=>{
     const {_id,care}=req.body
     try {
@@ -75,8 +74,5 @@ export const viewcontent=async(req,res)=>{
         console.log("error view")
     }
     
-   
-    // model.find().then((result)=>console.log(result)).catch((err)=>console.log(err))
-
 
 }
