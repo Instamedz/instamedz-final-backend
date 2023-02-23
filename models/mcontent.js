@@ -5,7 +5,7 @@ const contentSchema=new mongoose.Schema({
     content:{type:String,required:true},
     img:{type:String},
     bg:{type:String},
-    _id:{type:Number}
+
     
 })
 

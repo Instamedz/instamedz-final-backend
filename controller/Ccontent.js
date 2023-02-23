@@ -1,19 +1,15 @@
 import {eyemodel,covidmodel,dentalmodel,nutrimodel,soulmodel,heartmodel,childmodel} from "../models/mcontent.js"
 
-
 function modelfind(care){
-
     switch(care){
         case "eye":
             return eyemodel      
             break
         case "heart":
             return(heartmodel)
-
             break
         case "covid":
             return(covidmodel)
-       
             break
         case "dental":
             return(dentalmodel)
@@ -35,21 +31,17 @@ const {title,care,shd,color,content}=req.body
 
 const model=modelfind(care)
     try{
-        const _id=await model.countDocuments() +1
         const dataAdded = await model.create({
-            _id:_id,
             title:title,
             shd:shd,
             bg:color,
             content:content,
             img:""
         })
-        res.send({msg:"data added success"})
-
-      console.log("step1",dataAdded)
+        res.send({msg:"data added success",success:true})
     }
     catch(error){
-        res.send({msg:"err in content add"})
+        res.send({msg:"err in content add",success:false})
     }
 }
 
@@ -64,7 +56,6 @@ export const deletecontent=async(req,res)=>{
 }
 export const viewcontent=async(req,res)=>{
     const pr=req.body.care.toLowerCase() 
-    console.log(pr)
     const model=modelfind(pr)
     try {
         const all= await model.find()

@@ -5,7 +5,7 @@ import bp from "bcryptjs"
 export const Login =async(req,res)=>{
     const {email,password}=req.body
     try{
-        console.log(req.body)
+   
         // const existingUser=await modelinst.findOne({email:email})
         // const passwordcrt=await bp.compare(password,existingUser.password)
         // if(!existingUser){
@@ -21,6 +21,8 @@ export const Login =async(req,res)=>{
         //     }
 
         // }
+         
+        // put email and password inside env
         if (email==="instamdez@admin.com" && password ==="tak@bst123") {
             res.send({admin:true})
         }
