@@ -14,7 +14,7 @@ function modelfind(care){
         case "dental":
             return(dentalmodel)
             break
-        case "nutrimodel":
+        case "nutri":
             return(nutrimodel)
             break
         case "soul":
@@ -28,7 +28,7 @@ function modelfind(care){
 
 export const addcontent=async(req,res)=>{
 const {title,care,shd,color,content}=req.body
-
+console.log(req.body)
 const model=modelfind(care)
     try{
         const dataAdded = await model.create({
