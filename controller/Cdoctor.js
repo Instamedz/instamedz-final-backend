@@ -2,7 +2,7 @@ import { docmodel } from "../models/mdoctor.js"
 export const viewDoctor=async(req,res)=>{
     const {care}=req.params
     try {
-        const data=await docmodel.find();
+        const data=await docmodel.find({care:care});
         res.send(data)
     } catch (error) {
         console.log("errorin doctor fetch")
