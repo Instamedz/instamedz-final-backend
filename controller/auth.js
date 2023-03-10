@@ -32,7 +32,7 @@ export const Login =async(req,res)=>{
 }
 
 export const Signup=async(req,res)=>{
-const {email,password,name}=req.body
+const {email,password,name,sec}=req.body
 try {
     const existingUser=await usermodel.findOne({email:email})
     if(existingUser){
@@ -40,7 +40,7 @@ try {
     }
     else{
         const hashedPassword=await bp.hash(password,5)
-        const newUser=await usermodel.create({name:name,email:email,password:hashedPassword})   
+        const newUser=await usermodel.create({name:name,email:email,password:hashedPassword,secans:sec})   
         const token=jwt.sign({email:email,id:newUser._id},"test",{expiresIn:'1h'})
         res.status(200).send({result:newUser,token:token})
     }
@@ -48,6 +48,28 @@ try {
     res.status(500).send("something went wrong signup...")
 }
 }
+
+export const CheckSignup= async(req,res)=>{
+    const {email}=req.body
+    try {
+        const existingUser=await usermodel.findOne({email:email})
+        res.status(200).send({id:existingUser._id,sec:existingUser.secans,success:true})
+    } catch (error) {
+        res.status(404).send({message:"user doesn't exist",success:false})
+    }
+}
+
+export const ChangePass=async (req,res)=>{
+    const {id,password}=req.body
+    try {
+        const hashedPassword=await bp.hash(password,5)
+        const update=await usermodel.findByIdAndUpdate(id,{password:hashedPassword})
+        res.status(200).send({success:true})
+    } catch (error) {
+        res.status(404).send({success:false})
+    }
+}
+
 
 export const Form=async(req,res)=>{
     const {phone,Mode,Docid,uid,date}=req.body
@@ -75,7 +97,6 @@ export const Form=async(req,res)=>{
 
 export const Myappoint=async(req,res)=>{
     const {uid}=req.params
-    console.log(uid)
     try {
         const user=await usermodel.findById(uid)
         res.status(200).send(user)

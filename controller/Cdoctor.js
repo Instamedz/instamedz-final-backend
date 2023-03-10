@@ -25,10 +25,8 @@ export const addDoctor=async(req,res)=>{
 
 export const findDoctor=async(req,res)=>{
     const {id}=req.params
-    console.log(id)
     try {
         const docData = await docmodel.findById(id)
-        console.log(docData)
         res.status(200).send(docData)
     } catch (error) {
         console.log("error in find by id")

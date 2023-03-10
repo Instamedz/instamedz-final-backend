@@ -28,7 +28,6 @@ function modelfind(care){
 
 export const addcontent=async(req,res)=>{
 const {title,care,shd,color,content}=req.body
-console.log(req.body)
 const model=modelfind(care)
     try{
         const dataAdded = await model.create({
@@ -62,7 +61,7 @@ export const viewcontent=async(req,res)=>{
         res.status(200).send(all)
     } catch (error) {
         res.send({msg:"err in content view"})
-        console.log("error view")
+        
     }
     
 
