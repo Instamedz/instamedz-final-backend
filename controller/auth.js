@@ -53,6 +53,7 @@ export const CheckSignup= async(req,res)=>{
     const {email}=req.body
     try {
         const existingUser=await usermodel.findOne({email:email})
+        console.log(existingUser)
         res.status(200).send({id:existingUser._id,sec:existingUser.secans,success:true})
     } catch (error) {
         res.status(404).send({message:"user doesn't exist",success:false})

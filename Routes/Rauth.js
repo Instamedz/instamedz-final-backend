@@ -7,5 +7,4 @@ userRoutes.post("/signup",Signup)
 userRoutes.post("/formsubmit",Form)
 userRoutes.post("/changepassword",ChangePass)
 userRoutes.post("/checksignup",CheckSignup)
-
 userRoutes.get("/myappoint/:uid",Myappoint)
